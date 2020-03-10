@@ -901,12 +901,10 @@ module control
     always@(*)
     begin: state_table 
             case (current_state)					 
-					 S_REFRESH_PAUSE: next_state = go ? S_REFRESH_WAIT : S_REFRESH_PAUSE; // Loop in current state until value is input
+                S_REFRESH_PAUSE: next_state = go ? S_REFRESH_WAIT : S_REFRESH_PAUSE; // Loop in current state until value is input
                 S_REFRESH_WAIT: next_state = go ? S_REFRESH_WAIT : S_CLEAR; // Loop in current state until go signal goes low
-                
-					 S_CLEAR: next_state = (~clear_status) ? STATE_DRAW_0_0 : S_CLEAR; // Restart FSM
-                
-					 STATE_DRAW_0_0: next_state = (~draw_status) ? STATE_DRAW_0_1 : STATE_DRAW_0_0; // Loop in current state until value is input
+				S_CLEAR: next_state = (~clear_status) ? STATE_DRAW_0_0 : S_CLEAR; // Restart FSM
+				STATE_DRAW_0_0: next_state = (~draw_status) ? STATE_DRAW_0_1 : STATE_DRAW_0_0; // Loop in current state until value is input
                 STATE_DRAW_0_1: next_state = (~draw_status) ? STATE_DRAW_0_2 : STATE_DRAW_0_1; // Loop in current state until value is input
                 STATE_DRAW_0_2: next_state = (~draw_status) ? STATE_DRAW_0_3: STATE_DRAW_0_2; // Loop in current state until value is input
                 STATE_DRAW_0_3: next_state = (~draw_status) ? S_DRAW_H0 : STATE_DRAW_0_3; // Loop in current state until value is input
@@ -932,9 +930,8 @@ module control
     always @(*)
     begin: enable_signals
         // By default make all our signals 0
-        plot 		= 1'b0;
-		  clear 		= 1'b0;
-
+          plot      = 1'b0;
+		  clear 	= 1'b0;
 		  draw_0_0 	= 1'b0;
 		  draw_0_1 	= 1'b0;
 		  draw_0_2 	= 1'b0;
